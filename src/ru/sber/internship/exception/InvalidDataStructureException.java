@@ -1,4 +1,4 @@
-package ru.sber.internship;
+package ru.sber.internship.exception;
 
 public class InvalidDataStructureException extends Exception {
     public InvalidDataStructureException(String msg) {

@@ -1,4 +1,4 @@
-package ru.sber.internship;
+package ru.sber.internship.catalog;
 
 /**
  * City с полями::

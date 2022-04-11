@@ -1,10 +1,9 @@
 package ru.sber.internship;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+import ru.sber.internship.catalog.City;
+import ru.sber.internship.catalog.ReferenceBook;
+
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Необходимо реализовать класс Main, используя java.util.Scanner, прочесть информацию из текстового представления
@@ -30,39 +29,20 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        File file = new File("city_ru.csv");
-        String[] splitStr;
-        Scanner scanner = null;
-        List<City> cityList = new ArrayList<>();
 
-        try {
-            scanner = new Scanner(file);
-        } catch (IOException exc) {
-            exc.printStackTrace();
-        }
+        ReferenceBook referenceBook = new ReferenceBook();
 
-        while (scanner.hasNextLine()) {
-            City city = new City();
-            splitStr = scanner.nextLine().split(";");
+        List<City> cityList;
+        // Case 1
+        cityList = referenceBook.loadCity();
+        cityList = referenceBook.sortByCityName(cityList);
+        referenceBook.showCityList(cityList);
 
-            try {
-                if (splitStr.length != 6) {
-                    throw new InvalidDataStructureException(splitStr[0]);
-                }
-                city.setName(splitStr[1]);
-                city.setRegion(splitStr[2]);
-                city.setDistrict(splitStr[3]);
-                city.setPopulation(splitStr[4]);
-                city.setFoundation(splitStr[5]);
+        // Case 2
+        cityList = referenceBook.loadCity();
+        cityList = referenceBook.sortByCityNameAndDistrict(cityList);
+        referenceBook.showCityList(cityList);
 
-                cityList.add(city);
 
-            } catch (InvalidDataStructureException exc) {
-                exc.printStackTrace();
-            }
-        }
-        for (City myCity : cityList) {
-            System.out.println(myCity);
-        }
     }
 }
